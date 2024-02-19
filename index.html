@@ -343,11 +343,14 @@
                    <hr class="border-t-1 border-gray-400 my-4 border-dotted ">
 
                    <div class="w-full bg-gray-100 pt-4 flex flex-col justify-between items-center rounded-2xl">
-                    <div class="w-full flex justify-around  ">
-                      <p class="font-bold">Seats <span>2</span></p>
-                      <p class="font-bold">Class</p>
-                      <p class="font-bold">Price</p>
+                    <div id="totalPriceContainer" class="w-full flex justify-around">
+                      <div class="w-full flex justify-around">
+                        <p class="font-bold">Seats <span id="selectedSeatsCount">0</span></p>
+                        <p class="font-bold">Class</p>
+                        <p class="font-bold" >Price</p>
+                      </div>
                     </div>
+                    
                     
 
                     <div id="infoContainer">
@@ -365,9 +368,9 @@
                     </div>
                     <hr class="border-t- border-blue-500 my-4 border-dashed">
 
-                    <div class="w-full flex justify-around mb-4">
+                    <div class="w-full flex justify-around mb-4 ">
                       <p class="font-bold">Total price</p>
-                      <p class="font-bold">BDT 1100</p>
+                      <p class="font-bold">BDT <span id="totalPrice">1100</span></p>
                     </div>
 
                     <div class="w-[90%] flex justify-center items-center bg-gray-100 mt-10 rounded-xl">
@@ -382,7 +385,7 @@
                   </div>
 
 
-                  <div class="w-full">
+                  <div id="choose-first" class="w-full">
                     <button class="btn bg-green-600 text-white w-full mt-10">Next</button>
                   </div>
 

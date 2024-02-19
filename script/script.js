@@ -9,18 +9,43 @@ function scrollToSecondSection() {
 
 let totalSeats = 40;
 let selectedSeats = 0;
+let totalPrice = 0;
+const maxTickets = 4;
 
 function decreaseSeat(button) {
-  if (!button.disabled) {
+  if (!button.disabled && selectedSeats < maxTickets) {
     totalSeats--;
     selectedSeats++;
-  
+
     button.disabled = true;
 
     const buttonText = button.innerText;
     updateSeatsLeftButton();
     updateInfoContainer(buttonText); // Pass button text as a parameter
+    updateTotalPrice(); // Update total price
+    updateNextButton(); // Update "Next" button state
+
+    // Disable all buttons when the maximum limit is reached
+    if (selectedSeats === maxTickets) {
+      disableAllButtons();
+    }
   }
+}
+
+function enableNextButton() {
+  const nextButton = document.getElementById("choose-first");
+  if (nextButton) {
+    nextButton.disabled = false;
+  }
+}
+
+function disableAllButtons() {
+  const seatContainer = document.getElementById("seatContainer");
+  const buttons = seatContainer.querySelectorAll(".btn");
+
+  buttons.forEach((button) => {
+    button.disabled = true;
+  });
 }
 
 function updateSeatsLeftButton() {
@@ -50,10 +75,36 @@ function updateInfoContainer(buttonText) {
   }
 }
 
+function updateTotalPrice() {
+  const totalPriceSpan = document.getElementById("totalPrice");
+  if (totalPriceSpan) {
+    // Calculate the total price based on the number of selected seats
+    totalPrice = selectedSeats * 550; // Assuming the price per seat is 550, you can modify this value accordingly
+
+    // Update the HTML element with the calculated total price
+    totalPriceSpan.innerText = totalPrice;
+  }
+}
+
+function updateNextButton() {
+  const nextButton = document.getElementById("choose-first");
+  if (nextButton) {
+    // Enable or disable the "Next" button based on the number of selected seats
+    nextButton.disabled = selectedSeats === 0;
+  }
+}
+
 // Add event listeners to each button dynamically
 const seatContainer = document.getElementById("seatContainer");
 const buttons = seatContainer.querySelectorAll(".btn");
 
 buttons.forEach((button) => {
-  button.addEventListener("click", () => decreaseSeat(button));
+  button.addEventListener("click", () => {
+    decreaseSeat(button);
+    enableNextButton(); // Enable "Next" button when any seat button is clicked
+  });
 });
+
+// Initial update for the "Next" button state
+updateNextButton();
+
