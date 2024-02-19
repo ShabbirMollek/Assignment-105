@@ -98,13 +98,10 @@ function applyCoupon() {
  
        
        updateGrandTotal();
-     } else {
-       
-       discountPercentage = 0;
- 
-      
-       updateGrandTotal();
      }
+     else {
+      console.log('call')
+     } 
    }
  }
 
@@ -150,3 +147,11 @@ applyButton.addEventListener("click", applyCoupon);
 
 
 updateNextButton();
+
+
+document.getElementById('succeseful').addEventListener('click', function() {
+   document.getElementById('hide').style.display = "block";
+});
+
+
+
